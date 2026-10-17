@@ -16,6 +16,14 @@ claude mcp add --transport http kubecon https://kubecon.getmuyu.com/mcp
 
 claude.ai: Settings > Connectors > Add custom connector, URL `https://kubecon.getmuyu.com/mcp`.
 
+## Examples
+
+- What GPU talks are on Wednesday afternoon?
+- Find talks by Anthropic speakers.
+- What's in Grand Ballroom H on Tuesday?
+- Which observability talks start after 3 PM on Thursday?
+- Show me the full abstract for session 1247612.
+
 ## Tools
 
 - `search_sessions`: filter by `query`, `speaker`, `day`, `after`/`before` (HH:MM local), `room`, `track`
