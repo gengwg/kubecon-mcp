@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "module": "es2022",
+    "moduleResolution": "bundler",
+    "lib": ["es2023"],
+    "types": ["./worker-configuration.d.ts"],
+    "strict": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  "include": ["src", "test", "worker-configuration.d.ts"]
+}

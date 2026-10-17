@@ -1,0 +1,1131 @@
+{
+  "sessions": [
+    {
+      "id": "1289828",
+      "title": "Kubernetes under Fire: Igniting Performance and Burning Through Bottlenecks with Kube-Burner",
+      "description": "What happens when your Kubernetes cluster is pushed to its limits—does it scale or break in unexpected ways?\r\n\r\nIn this lightning talk, I’ll show how kube-burner is used to stress-test clusters, uncover performance bottlenecks, and catch regressions early.\r\n\r\nThrough quick examples, you’ll see how to run benchmarks, capture meaningful metrics, and identify issues like resource startup latencies and control plane slowdowns.\r\n\r\nWe’ll also highlight its role in upstream efforts like Kubernetes SIG KubeVirt and SIG Scalability, along with the project’s current scope and upcoming areas of development.\r\n\r\nIf you care about scalability and performance, this session gives you a fast, practical starting point.\r\n",
+      "startsAt": "2026-11-09T09:24:00",
+      "endsAt": "2026-11-09T09:29:00",
+      "isServiceSession": false,
+      "isPlenumSession": false,
+      "speakers": [
+        "5a9c00c9-dd42-42a9-a158-6f6bd061f75b"
+      ],
+      "categoryItems": [
+        496288,
+        497642
+      ],
+      "questionAnswers": [],
+      "roomId": 82957,
+      "liveUrl": null,
+      "recordingUrl": null,
+      "status": "Accepted",
+      "isInformed": true,
+      "isConfirmed": true
+    },
+    {
+      "id": "1302801",
+      "title": "Welcome + Opening Remarks",
+      "description": null,
+      "startsAt": "2026-11-10T09:00:00",
+      "endsAt": "2026-11-10T09:30:00",
+      "isServiceSession": false,
+      "isPlenumSession": false,
+      "speakers": [
+        "3e2472c2-8a1d-439b-9b13-030a77759ec9",
+        "a6af85ee-7f4c-44a8-82ba-54cca2777fad",
+        "a056f172-84b3-43ad-ab16-91d76db59966",
+        "7ba0e0db-b8be-4a8d-a88e-b410b88ec162"
+      ],
+      "categoryItems": [
+        496573
+      ],
+      "questionAnswers": [
+        {
+          "questionId": 142725,
+          "answerValue": "Jonathan Bryce, Chris Aniszczyk"
+        }
+      ],
+      "roomId": 82947,
+      "liveUrl": null,
+      "recordingUrl": null,
+      "status": "Accepted",
+      "isInformed": false,
+      "isConfirmed": false
+    },
+    {
+      "id": "1239823",
+      "title": "Tracing at Scale: Running a 16 Billion Spans/Hour Pipeline at Nubank",
+      "description": "When off-the-shelf solutions stop scaling, you build your own or break trying.\r\n\r\nAt Nubank, distributed tracing isn't a nice-to-have: it's the backbone of observability across thousands of microservices, processing hundreds of billions of spans every day with zero tolerance for data loss. When the need for full ownership and operational independence became clear, we built a hybrid pipeline from the ground up.\r\n\r\nThis talk walks through the full tracing journey at Nubank,  from instrumentation strategy to a production-grade pipeline operating at petabyte scale. We'll cover how the OpenTelemetry Collector serves as our ingestion backbone, the architectural decisions that made the system resilient, the failure modes we didn't anticipate, and the hard-learned trade-offs behind blending open-source tooling with purpose-built internal components.\r\n\r\nYou'll leave with a realistic picture of what it takes to run distributed tracing at scale.",
+      "startsAt": "2026-11-10T14:50:00",
+      "endsAt": "2026-11-10T15:20:00",
+      "isServiceSession": false,
+      "isPlenumSession": false,
+      "speakers": [
+        "9ba8c31d-7477-447c-bab5-b1ae22c4515f",
+        "6cda2c92-e3df-4859-ad35-e773a871fa1c"
+      ],
+      "categoryItems": [
+        465815,
+        465822,
+        496398
+      ],
+      "questionAnswers": [],
+      "roomId": 82948,
+      "liveUrl": null,
+      "recordingUrl": null,
+      "status": "Accepted",
+      "isInformed": true,
+      "isConfirmed": true
+    },
+    {
+      "id": "1247612",
+      "title": "How Anthropic Almost Melted GKE (And the PRs That Saved It)",
+      "description": "At 50,000 nodes, component failure is a statistical certainty—but total control-plane collapse shouldn't be. When Anthropic and Google pushed GKE to these limits on production AI workloads, the real threat wasn't the initial faults; it was the catastrophic loss of graceful degradation. Default upstream mechanics frequently turned localized anomalies into cascading, fleet-wide stalls.\r\nThis talk explores six joint war stories where Kubernetes' built-in self-healing broke down: from a CNI startup probe that couldn't outlast its own informer sync, to an APF cost-misestimation that triggered master OOMs.\r\nWe will detail the exact failure modes, the joint debugging, and the upstream PRs that enforced blast-radius isolation. Finally, we’ll examine how these lessons drive forward-looking community work—like queue isolation and stateless controllers—ensuring Kubernetes handles massive scale gracefully without breaking.",
+      "startsAt": "2026-11-11T11:50:00",
+      "endsAt": "2026-11-11T12:20:00",
+      "isServiceSession": false,
+      "isPlenumSession": false,
+      "speakers": [
+        "abd3b97f-9f27-42f7-b146-62841d72101f",
+        "d8b25a14-2112-4d73-bec9-e33362fe6bec"
+      ],
+      "categoryItems": [
+        465812,
+        465819,
+        496398
+      ],
+      "questionAnswers": [],
+      "roomId": 82950,
+      "liveUrl": null,
+      "recordingUrl": null,
+      "status": "Accepted",
+      "isInformed": true,
+      "isConfirmed": true
+    },
+    {
+      "id": "1244576",
+      "title": "GPU Observability with eBPF: From Kernel Hooks to Kubernetes Metrics",
+      "description": "GPUs are now a critical resource in Kubernetes clusters, yet observing what is happening on them remains a black box. eBPF, already the go-to technology for system-level observability, can be extended to observe GPU workloads, providing production grade visibility without modifying application code. \r\n\r\nIn this talk, we will show you how to get started writing eBPF programs that observe GPU activity. We will walk through how to hook into GPU interfaces, enrich data with Kubernetes context (pods, containers, namespaces), and extract meaningful metrics. Then we’ll cover how to package your eBPF programs as OCI images for easy distribution and deployment across clusters. Finally, we’ll demonstrate how to pipe GPU telemetry into Prometheus and OpenTelemetry so it integrates seamlessly with your existing observability stack. Along the way, we will share guidelines and lessons learned from building GPU observability programs, so you can avoid common pitfalls and hit the ground running.",
+      "startsAt": "2026-11-11T15:10:00",
+      "endsAt": "2026-11-11T15:40:00",
+      "isServiceSession": false,
+      "isPlenumSession": false,
+      "speakers": [
+        "cfecaf54-cb37-4e13-8db8-84beddb65cae",
+        "7df463c7-92b4-4f40-992d-137077e489b3"
+      ],
+      "categoryItems": [
+        465816,
+        465819
+      ],
+      "questionAnswers": [],
+      "roomId": 82952,
+      "liveUrl": null,
+      "recordingUrl": null,
+      "status": "Accepted",
+      "isInformed": true,
+      "isConfirmed": true
+    },
+    {
+      "id": "1228453",
+      "title": "Anthropic’s Kubernetes Scheduler for Frontier AI: What Worked, What Broke",
+      "description": "A TPU on the wrong torus coordinate is worthless. So is one GPU placed outside its NVLink island. For frontier training, where a pod lands matters as much as whether it lands at all. And they have to land as a gang: every pod in the job on contiguous hardware, or none at all. The default scheduler scores pods one at a time and has no vocabulary for \"all 256 of these, on contiguous hardware, or none.\"\r\n\r\nThis is Anthropic's account of building the scheduler that does and how we kept it fast as clusters grew toward GKE's 65K node limit. Part one is design: modeling interconnect topology as first-class scheduling domains, gang admission with graceful eviction, capacity allocation, and defragmentation. Part two is the performance story - the optimizations that brought average processing time to under 3ms per job: gating expensive affinity checks behind cheap predicates, efficient resource accounting, and caching infeasibility verdicts.",
+      "startsAt": "2026-11-12T13:50:00",
+      "endsAt": "2026-11-12T14:20:00",
+      "isServiceSession": false,
+      "isPlenumSession": false,
+      "speakers": [
+        "2a916b53-a85f-4e7b-9694-8b49be85b86d"
+      ],
+      "categoryItems": [
+        465809,
+        465819,
+        496398
+      ],
+      "questionAnswers": [],
+      "roomId": 82948,
+      "liveUrl": null,
+      "recordingUrl": null,
+      "status": "Accepted",
+      "isInformed": true,
+      "isConfirmed": true
+    },
+    {
+      "id": "1352094",
+      "title": "BREAK",
+      "description": null,
+      "startsAt": "2026-11-09T10:55:00",
+      "endsAt": "2026-11-09T11:10:00",
+      "isServiceSession": false,
+      "isPlenumSession": false,
+      "speakers": [],
+      "categoryItems": [
+        496288
+      ],
+      "questionAnswers": [],
+      "roomId": 82957,
+      "liveUrl": null,
+      "recordingUrl": null,
+      "status": "Accepted",
+      "isInformed": false,
+      "isConfirmed": false
+    }
+  ],
+  "speakers": [
+    {
+      "id": "5a9c00c9-dd42-42a9-a158-6f6bd061f75b",
+      "fullName": "Andrew Collins",
+      "tagLine": "Red Hat, Principal Software Engineer",
+      "sessions": [
+        1289828
+      ]
+    },
+    {
+      "id": "a6af85ee-7f4c-44a8-82ba-54cca2777fad",
+      "fullName": "Chris Aniszczyk",
+      "tagLine": "building a better world through open collaboration",
+      "sessions": [
+        1302801
+      ]
+    },
+    {
+      "id": "2a916b53-a85f-4e7b-9694-8b49be85b86d",
+      "fullName": "Decheng Dai",
+      "tagLine": "Anthropic, Member of Technical Staff",
+      "sessions": [
+        1250150,
+        1228453
+      ]
+    },
+    {
+      "id": "9ba8c31d-7477-447c-bab5-b1ae22c4515f",
+      "fullName": "Felipe Araujo",
+      "tagLine": "Technical Lead at Nubank's Observability team",
+      "sessions": [
+        1239823
+      ]
+    },
+    {
+      "id": "d8b25a14-2112-4d73-bec9-e33362fe6bec",
+      "fullName": "Jian Cheung",
+      "tagLine": "Anthropic, Member of Technical Staff",
+      "sessions": [
+        1247612
+      ]
+    },
+    {
+      "id": "3e2472c2-8a1d-439b-9b13-030a77759ec9",
+      "fullName": "Jonathan Bryce",
+      "tagLine": null,
+      "sessions": [
+        1302801
+      ]
+    },
+    {
+      "id": "6cda2c92-e3df-4859-ad35-e773a871fa1c",
+      "fullName": "Kaynan Coelho",
+      "tagLine": "Engineering Manager at Nubank",
+      "sessions": [
+        1239823
+      ]
+    },
+    {
+      "id": "a056f172-84b3-43ad-ab16-91d76db59966",
+      "fullName": "Kevin Cochrane",
+      "tagLine": null,
+      "sessions": [
+        1302801
+      ]
+    },
+    {
+      "id": "abd3b97f-9f27-42f7-b146-62841d72101f",
+      "fullName": "Maciek Różacki",
+      "tagLine": "Google, Group Product Manager",
+      "sessions": [
+        1247612
+      ]
+    },
+    {
+      "id": "7df463c7-92b4-4f40-992d-137077e489b3",
+      "fullName": "Michael Friese",
+      "tagLine": "Senior Software Engineer at Microsoft",
+      "sessions": [
+        1244576,
+        1294763
+      ]
+    },
+    {
+      "id": "cfecaf54-cb37-4e13-8db8-84beddb65cae",
+      "fullName": "Qasim Sarfraz",
+      "tagLine": "Software Engineer at Microsoft",
+      "sessions": [
+        1289872,
+        1244576,
+        1294763
+      ]
+    },
+    {
+      "id": "7ba0e0db-b8be-4a8d-a88e-b410b88ec162",
+      "fullName": "Robert Nishihara",
+      "tagLine": "Co-founder, Anyscale",
+      "sessions": [
+        1302801,
+        1250150
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "id": 82947,
+      "name": "Salt Palace | Level 1 | Hall DE",
+      "sort": 0
+    },
+    {
+      "id": 82948,
+      "name": "Salt Palace | Level 1 | Grand Ballroom ACE",
+      "sort": 1
+    },
+    {
+      "id": 82950,
+      "name": "Salt Palace | Level 1 | Grand Ballroom H",
+      "sort": 3
+    },
+    {
+      "id": 82952,
+      "name": "Salt Palace | Level 1 | 151 ",
+      "sort": 5
+    },
+    {
+      "id": 82957,
+      "name": "Hyatt Regency | Level 4 | Regency Ballroom B-D",
+      "sort": 10
+    }
+  ],
+  "categories": [
+    {
+      "id": 128813,
+      "title": "All Sessions",
+      "items": [
+        {
+          "id": 465809,
+          "name": "AI Inference + Agentic",
+          "sort": 1
+        },
+        {
+          "id": 465818,
+          "name": "Application Development + Delivery",
+          "sort": 2
+        },
+        {
+          "id": 465817,
+          "name": "Cloud Native Experience",
+          "sort": 3
+        },
+        {
+          "id": 465813,
+          "name": "Cloud Native Novice",
+          "sort": 4
+        },
+        {
+          "id": 465808,
+          "name": "Connectivity",
+          "sort": 5
+        },
+        {
+          "id": 465810,
+          "name": "Data Processing + Storage",
+          "sort": 6
+        },
+        {
+          "id": 465816,
+          "name": "Emerging + Advanced",
+          "sort": 7
+        },
+        {
+          "id": 465815,
+          "name": "Observability",
+          "sort": 8
+        },
+        {
+          "id": 465812,
+          "name": "Operations + Performance",
+          "sort": 9
+        },
+        {
+          "id": 465811,
+          "name": "Platform Engineering",
+          "sort": 10
+        },
+        {
+          "id": 465814,
+          "name": "Security",
+          "sort": 11
+        },
+        {
+          "id": 496153,
+          "name": "Maintainer Track",
+          "sort": 12
+        },
+        {
+          "id": 496282,
+          "name": "⚡ Lightning Talks",
+          "sort": 13
+        },
+        {
+          "id": 496283,
+          "name": "📚 Tutorials",
+          "sort": 14
+        },
+        {
+          "id": 496284,
+          "name": "🚨 Contribfest",
+          "sort": 15
+        },
+        {
+          "id": 496285,
+          "name": "🪧 Poster Sessions",
+          "sort": 16
+        },
+        {
+          "id": 496286,
+          "name": "Experiences",
+          "sort": 17
+        },
+        {
+          "id": 496287,
+          "name": "Inclusion + Accessibility",
+          "sort": 18
+        },
+        {
+          "id": 515265,
+          "name": "Project Opportunities",
+          "sort": 19
+        },
+        {
+          "id": 496288,
+          "name": "Project Lightning Talks",
+          "sort": 20
+        },
+        {
+          "id": 514861,
+          "name": "Project Pavilion Tours",
+          "sort": 21
+        },
+        {
+          "id": 520089,
+          "name": "Project Pavilion Stage",
+          "sort": 22
+        },
+        {
+          "id": 496289,
+          "name": "Registration",
+          "sort": 23
+        },
+        {
+          "id": 496290,
+          "name": "Solutions Showcase",
+          "sort": 24
+        },
+        {
+          "id": 496291,
+          "name": "Sponsor-hosted Co-located Events",
+          "sort": 25
+        },
+        {
+          "id": 496573,
+          "name": "Keynote Sessions",
+          "sort": 26
+        },
+        {
+          "id": 496574,
+          "name": "CNCF-hosted Co-located Events",
+          "sort": 27
+        },
+        {
+          "id": 496575,
+          "name": "Breaks",
+          "sort": 28
+        },
+        {
+          "id": 512413,
+          "name": "Cloud Native Theater",
+          "sort": 29
+        },
+        {
+          "id": 518734,
+          "name": "Sponsor Demo Theater",
+          "sort": 30
+        }
+      ],
+      "sort": 1,
+      "type": "session"
+    },
+    {
+      "id": 128814,
+      "title": "Audience Level",
+      "items": [
+        {
+          "id": 465820,
+          "name": "Beginner",
+          "sort": 1
+        },
+        {
+          "id": 465819,
+          "name": "Advanced",
+          "sort": 2
+        },
+        {
+          "id": 465822,
+          "name": "Any Level",
+          "sort": 3
+        }
+      ],
+      "sort": 3,
+      "type": "session"
+    },
+    {
+      "id": 136945,
+      "title": "SubTopic",
+      "items": [
+        {
+          "id": 496281,
+          "name": "AI Inference + Agentic",
+          "sort": 1
+        },
+        {
+          "id": 496271,
+          "name": "Application Development + Delivery",
+          "sort": 2
+        },
+        {
+          "id": 496272,
+          "name": "Cloud Native Experience",
+          "sort": 3
+        },
+        {
+          "id": 496280,
+          "name": "Cloud Native Novice",
+          "sort": 4
+        },
+        {
+          "id": 496273,
+          "name": "Connectivity",
+          "sort": 5
+        },
+        {
+          "id": 496274,
+          "name": "Data Processing + Storage",
+          "sort": 6
+        },
+        {
+          "id": 496275,
+          "name": "Emerging + Advanced",
+          "sort": 7
+        },
+        {
+          "id": 496276,
+          "name": "Observability",
+          "sort": 8
+        },
+        {
+          "id": 496277,
+          "name": "Operations + Performance",
+          "sort": 9
+        },
+        {
+          "id": 496278,
+          "name": "Platform Engineering",
+          "sort": 10
+        },
+        {
+          "id": 496279,
+          "name": "Security",
+          "sort": 11
+        },
+        {
+          "id": 512406,
+          "name": "EnvoyCon",
+          "sort": 12
+        },
+        {
+          "id": 512407,
+          "name": "Istio Day",
+          "sort": 13
+        },
+        {
+          "id": 512408,
+          "name": "Cloud Native University",
+          "sort": 14
+        },
+        {
+          "id": 512409,
+          "name": "KyvernoCon",
+          "sort": 15
+        },
+        {
+          "id": 512410,
+          "name": "KubeVirt Summit",
+          "sort": 16
+        },
+        {
+          "id": 512411,
+          "name": "Kubeflow Summit",
+          "sort": 17
+        },
+        {
+          "id": 512412,
+          "name": "llm-d",
+          "sort": 18
+        },
+        {
+          "id": 515763,
+          "name": "BoF",
+          "sort": 19
+        }
+      ],
+      "sort": 72,
+      "type": "session"
+    },
+    {
+      "id": 136946,
+      "title": "CNCF Projects",
+      "items": [
+        {
+          "id": 497600,
+          "name": "AI Gateway",
+          "sort": 1
+        },
+        {
+          "id": 497671,
+          "name": "API Machinery",
+          "sort": 2
+        },
+        {
+          "id": 497672,
+          "name": "Apps",
+          "sort": 3
+        },
+        {
+          "id": 497673,
+          "name": "Architecture",
+          "sort": 4
+        },
+        {
+          "id": 497674,
+          "name": "Atlantis",
+          "sort": 5
+        },
+        {
+          "id": 497629,
+          "name": "Auth",
+          "sort": 6
+        },
+        {
+          "id": 497630,
+          "name": "Autoscaling",
+          "sort": 7
+        },
+        {
+          "id": 497631,
+          "name": "Backstage",
+          "sort": 8
+        },
+        {
+          "id": 497632,
+          "name": "Batch",
+          "sort": 9
+        },
+        {
+          "id": 497650,
+          "name": "Buildpacks",
+          "sort": 10
+        },
+        {
+          "id": 497651,
+          "name": "Cadence Workflow",
+          "sort": 11
+        },
+        {
+          "id": 497652,
+          "name": "Cedar",
+          "sort": 12
+        },
+        {
+          "id": 497653,
+          "name": "Cilium",
+          "sort": 13
+        },
+        {
+          "id": 497675,
+          "name": "CLI",
+          "sort": 14
+        },
+        {
+          "id": 497676,
+          "name": "Cloud Provider",
+          "sort": 15
+        },
+        {
+          "id": 497677,
+          "name": "Cluster Lifecycle",
+          "sort": 16
+        },
+        {
+          "id": 497678,
+          "name": "CoHDI",
+          "sort": 17
+        },
+        {
+          "id": 497633,
+          "name": "Containerd",
+          "sort": 18
+        },
+        {
+          "id": 497634,
+          "name": "Contributor Experience",
+          "sort": 19
+        },
+        {
+          "id": 497635,
+          "name": "Copacetic",
+          "sort": 20
+        },
+        {
+          "id": 497636,
+          "name": "CoreDNS",
+          "sort": 21
+        },
+        {
+          "id": 497654,
+          "name": "Cortex",
+          "sort": 22
+        },
+        {
+          "id": 497655,
+          "name": "cri-o",
+          "sort": 23
+        },
+        {
+          "id": 497656,
+          "name": "Crossplane",
+          "sort": 24
+        },
+        {
+          "id": 497657,
+          "name": "Dapr",
+          "sort": 25
+        },
+        {
+          "id": 497601,
+          "name": "Data Protection",
+          "sort": 26
+        },
+        {
+          "id": 497602,
+          "name": "Developer Experience",
+          "sort": 27
+        },
+        {
+          "id": 497603,
+          "name": "Device Management",
+          "sort": 28
+        },
+        {
+          "id": 497604,
+          "name": "Docs",
+          "sort": 29
+        },
+        {
+          "id": 497605,
+          "name": "Dragonfly",
+          "sort": 30
+        },
+        {
+          "id": 497606,
+          "name": "Emissary-ingress",
+          "sort": 31
+        },
+        {
+          "id": 497607,
+          "name": "Envoy",
+          "sort": 32
+        },
+        {
+          "id": 497608,
+          "name": "etcd",
+          "sort": 33
+        },
+        {
+          "id": 497679,
+          "name": "Falco",
+          "sort": 34
+        },
+        {
+          "id": 497680,
+          "name": "Flatcar Container Linux",
+          "sort": 35
+        },
+        {
+          "id": 497681,
+          "name": "Fluentd",
+          "sort": 36
+        },
+        {
+          "id": 497682,
+          "name": "Flux",
+          "sort": 37
+        },
+        {
+          "id": 497637,
+          "name": "Harbor",
+          "sort": 38
+        },
+        {
+          "id": 497638,
+          "name": "Helm",
+          "sort": 39
+        },
+        {
+          "id": 497639,
+          "name": "in-toto",
+          "sort": 40
+        },
+        {
+          "id": 497640,
+          "name": "Infrastructure",
+          "sort": 41
+        },
+        {
+          "id": 497658,
+          "name": "Inspektor Gadget",
+          "sort": 42
+        },
+        {
+          "id": 497659,
+          "name": "Jaeger",
+          "sort": 43
+        },
+        {
+          "id": 497660,
+          "name": "k0s",
+          "sort": 44
+        },
+        {
+          "id": 497661,
+          "name": "K3s",
+          "sort": 45
+        },
+        {
+          "id": 497609,
+          "name": "k8gb",
+          "sort": 46
+        },
+        {
+          "id": 497610,
+          "name": "Kairos",
+          "sort": 47
+        },
+        {
+          "id": 497611,
+          "name": "Karmada",
+          "sort": 48
+        },
+        {
+          "id": 497612,
+          "name": "Kepler",
+          "sort": 49
+        },
+        {
+          "id": 497683,
+          "name": "Keycloak",
+          "sort": 50
+        },
+        {
+          "id": 497684,
+          "name": "KitOps",
+          "sort": 51
+        },
+        {
+          "id": 497641,
+          "name": "KServe",
+          "sort": 52
+        },
+        {
+          "id": 497642,
+          "name": "kube-burner",
+          "sort": 53
+        },
+        {
+          "id": 497662,
+          "name": "KubeEdge",
+          "sort": 54
+        },
+        {
+          "id": 497663,
+          "name": "Kubeflow",
+          "sort": 55
+        },
+        {
+          "id": 497685,
+          "name": "KubeVirt",
+          "sort": 56
+        },
+        {
+          "id": 497686,
+          "name": "Kyverno",
+          "sort": 57
+        },
+        {
+          "id": 497643,
+          "name": "Lima",
+          "sort": 58
+        },
+        {
+          "id": 497644,
+          "name": "Linkerd",
+          "sort": 59
+        },
+        {
+          "id": 497664,
+          "name": "Litmus",
+          "sort": 60
+        },
+        {
+          "id": 497665,
+          "name": "Longhorn",
+          "sort": 61
+        },
+        {
+          "id": 497613,
+          "name": "Meshery",
+          "sort": 62
+        },
+        {
+          "id": 497614,
+          "name": "Metal3.io",
+          "sort": 63
+        },
+        {
+          "id": 497615,
+          "name": "Multicluster",
+          "sort": 64
+        },
+        {
+          "id": 497616,
+          "name": "Network",
+          "sort": 65
+        },
+        {
+          "id": 497687,
+          "name": "Node",
+          "sort": 66
+        },
+        {
+          "id": 497688,
+          "name": "Node Lifecycle",
+          "sort": 67
+        },
+        {
+          "id": 497645,
+          "name": "Open Cluster Management",
+          "sort": 68
+        },
+        {
+          "id": 497646,
+          "name": "Open Policy Agent (OPA)",
+          "sort": 69
+        },
+        {
+          "id": 497666,
+          "name": "OpenChoreo",
+          "sort": 70
+        },
+        {
+          "id": 497667,
+          "name": "OpenCost",
+          "sort": 71
+        },
+        {
+          "id": 497689,
+          "name": "OpenEverest",
+          "sort": 72
+        },
+        {
+          "id": 497668,
+          "name": "OpenFeature",
+          "sort": 73
+        },
+        {
+          "id": 497647,
+          "name": "OpenFGA",
+          "sort": 74
+        },
+        {
+          "id": 497690,
+          "name": "OpenKruise",
+          "sort": 75
+        },
+        {
+          "id": 497669,
+          "name": "Operational Resilience",
+          "sort": 76
+        },
+        {
+          "id": 497648,
+          "name": "Operator Framework",
+          "sort": 77
+        },
+        {
+          "id": 497691,
+          "name": "ORAS",
+          "sort": 78
+        },
+        {
+          "id": 497617,
+          "name": "OSCAL Compass",
+          "sort": 79
+        },
+        {
+          "id": 497618,
+          "name": "OVN-Kubernetes",
+          "sort": 80
+        },
+        {
+          "id": 497619,
+          "name": "Release",
+          "sort": 81
+        },
+        {
+          "id": 497620,
+          "name": "Rook",
+          "sort": 82
+        },
+        {
+          "id": 497670,
+          "name": "Scheduling",
+          "sort": 83
+        },
+        {
+          "id": 497649,
+          "name": "Security",
+          "sort": 84
+        },
+        {
+          "id": 497621,
+          "name": "SPIFFE",
+          "sort": 85
+        },
+        {
+          "id": 497622,
+          "name": "Storage",
+          "sort": 86
+        },
+        {
+          "id": 497623,
+          "name": "Strimzi",
+          "sort": 87
+        },
+        {
+          "id": 497624,
+          "name": "Tekton",
+          "sort": 88
+        },
+        {
+          "id": 497625,
+          "name": "Velero",
+          "sort": 89
+        },
+        {
+          "id": 497626,
+          "name": "Vitess",
+          "sort": 90
+        },
+        {
+          "id": 497627,
+          "name": "Volcano",
+          "sort": 91
+        },
+        {
+          "id": 497628,
+          "name": "Workloads Foundation",
+          "sort": 92
+        },
+        {
+          "id": 498151,
+          "name": "Argo",
+          "sort": 93
+        },
+        {
+          "id": 498153,
+          "name": "Istio",
+          "sort": 94
+        },
+        {
+          "id": 498152,
+          "name": "Podman Container Tools",
+          "sort": 95
+        },
+        {
+          "id": 498154,
+          "name": "Kubernetes",
+          "sort": 96
+        },
+        {
+          "id": 498155,
+          "name": "OpenTelemetry",
+          "sort": 97
+        },
+        {
+          "id": 498156,
+          "name": "HAMi",
+          "sort": 98
+        },
+        {
+          "id": 498157,
+          "name": "Kagent",
+          "sort": 99
+        },
+        {
+          "id": 511067,
+          "name": "KubeStellar",
+          "sort": 100
+        },
+        {
+          "id": 517207,
+          "name": "Hive Commons",
+          "sort": 101
+        }
+      ],
+      "sort": 73,
+      "type": "session"
+    },
+    {
+      "id": 136947,
+      "title": "End User Programming",
+      "items": [
+        {
+          "id": 496398,
+          "name": "End User Talk",
+          "sort": 1
+        }
+      ],
+      "sort": 74,
+      "type": "session"
+    },
+    {
+      "id": 142047,
+      "title": "Is Sponsored Keynote",
+      "items": [
+        {
+          "id": 514809,
+          "name": "Sponsored",
+          "sort": 1
+        }
+      ],
+      "sort": 76,
+      "type": "session"
+    }
+  ],
+  "questions": []
+}
