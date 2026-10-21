@@ -5,6 +5,10 @@ import { SCHEDULE_URL, formatDetail, formatLine, listFilters, loadSessions, sear
 
 const text = (t: string) => ({ content: [{ type: "text" as const, text: t }] });
 
+// One JSON line per call, so Workers Logs can count calls by tool. What people searched for is not logged.
+const logCall = (tool: string, fields: Record<string, unknown> = {}) =>
+  console.log(JSON.stringify({ event: "tool_call", tool, ...fields }));
+
 function createServer() {
   const server = new McpServer(
     { name: "unofficial-kubecon-na-2026", version: "1.0.0" },
@@ -34,6 +38,8 @@ function createServer() {
     },
     async ({ limit, ...filters }) => {
       const hits = search(await loadSessions(), filters);
+      const used = Object.entries(filters).filter(([, v]) => v !== undefined).map(([k]) => k);
+      logCall("search_sessions", { filters: used, matches: hits.length });
       if (!hits.length) return text("No matching sessions.");
       const shown = hits.slice(0, limit).map(formatLine).join("\n");
       return text(`${Math.min(limit, hits.length)} of ${hits.length} matches:\n${shown}`);
@@ -48,6 +54,7 @@ function createServer() {
     },
     async ({ id }) => {
       const s = (await loadSessions()).find((s) => s.id === id);
+      logCall("get_session", { found: Boolean(s) });
       return text(s ? formatDetail(s) : `No session with id ${id}.`);
     },
   );
@@ -55,7 +62,10 @@ function createServer() {
   server.registerTool(
     "list_filters",
     { description: "Valid days, rooms and tracks to use as search_sessions filters." },
-    async () => text(JSON.stringify(listFilters(await loadSessions()), null, 2)),
+    async () => {
+      logCall("list_filters");
+      return text(JSON.stringify(listFilters(await loadSessions()), null, 2));
+    },
   );
 
   return server;
