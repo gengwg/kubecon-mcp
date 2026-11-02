@@ -1,13 +1,9 @@
 import { McpServer } from "@modelcontextprotocol/server";
 import { createMcpHandler } from "agents/mcp/server";
 import { z } from "zod";
-import { SCHEDULE_URL, formatDetail, formatLine, listFilters, loadSessions, search } from "./schedule";
+import { SCHEDULE_URL, formatDetail, formatFilters, formatLine, listFilters, loadSessions, parseTime, search } from "./schedule";
 
 const text = (t: string) => ({ content: [{ type: "text" as const, text: t }] });
-
-// One JSON line per call, so Workers Logs can count calls by tool. What people searched for is not logged.
-const logCall = (tool: string, fields: Record<string, unknown> = {}) =>
-  console.log(JSON.stringify({ event: "tool_call", tool, ...fields }));
 
 function createServer() {
   const server = new McpServer(
@@ -19,6 +15,18 @@ function createServer() {
     },
   );
 
+  // One JSON line per call, so Workers Logs can count calls by tool and client. What people
+  // searched for is not logged. The client name is only known on per-request (2026) protocol calls.
+  const logCall = (tool: string, fields: Record<string, unknown> = {}) =>
+    console.log(
+      JSON.stringify({
+        event: "tool_call",
+        tool,
+        client: server.server.getClientVersion()?.name ?? "unknown",
+        ...fields,
+      }),
+    );
+
   server.registerTool(
     "search_sessions",
     {
@@ -29,14 +37,23 @@ function createServer() {
         query: z.string().optional().describe("Words that must all appear in title, abstract, track or tags"),
         speaker: z.string().optional().describe("Speaker name or company"),
         day: z.string().optional().describe("Weekday (mon, tue, wed, thu) or date (2026-11-10)"),
-        after: z.string().regex(/^\d{2}:\d{2}$/).optional().describe("Starts at or after HH:MM local"),
-        before: z.string().regex(/^\d{2}:\d{2}$/).optional().describe("Starts before HH:MM local"),
+        after: z.string().optional().describe("Starts at or after this local time, e.g. 14:00 or 2pm"),
+        before: z.string().optional().describe("Starts before this local time, e.g. 9:30 or 9:30am"),
         room: z.string().optional().describe("Room name substring, e.g. 'Grand Ballroom H'"),
         track: z.string().optional().describe("Track or tag substring, e.g. 'Observability'"),
         limit: z.number().int().min(1).max(100).default(25),
       },
     },
     async ({ limit, ...filters }) => {
+      for (const key of ["after", "before"] as const) {
+        if (filters[key] === undefined) continue;
+        const time = parseTime(filters[key]);
+        if (!time) {
+          logCall("search_sessions", { rejected: key });
+          return text(`Could not read ${key} "${filters[key]}". Use a time like 14:00, 2pm or 9:30am.`);
+        }
+        filters[key] = time;
+      }
       const hits = search(await loadSessions(), filters);
       const used = Object.entries(filters).filter(([, v]) => v !== undefined).map(([k]) => k);
       logCall("search_sessions", { filters: used, matches: hits.length });
@@ -64,7 +81,7 @@ function createServer() {
     { description: "Valid days, rooms and tracks to use as search_sessions filters." },
     async () => {
       logCall("list_filters");
-      return text(JSON.stringify(listFilters(await loadSessions()), null, 2));
+      return text(formatFilters(listFilters(await loadSessions())));
     },
   );
 

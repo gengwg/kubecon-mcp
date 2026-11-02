@@ -109,6 +109,20 @@ export function search(sessions: Session[], f: Filters): Session[] {
   });
 }
 
+/** Reads 14:00, 9:30, 9am, 2:30 pm or 14 as HH:MM. Agents send all of these. */
+export function parseTime(input: string): string | undefined {
+  const m = input.trim().toLowerCase().match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?$/);
+  if (!m) return undefined;
+  let hour = Number(m[1]);
+  const minute = Number(m[2] ?? 0);
+  if (m[3]) {
+    if (hour < 1 || hour > 12) return undefined;
+    hour = (hour % 12) + (m[3] === "pm" ? 12 : 0);
+  }
+  if (hour > 23 || minute > 59) return undefined;
+  return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+}
+
 export function listFilters(sessions: Session[]) {
   const uniq = (xs: string[]) => [...new Set(xs.filter(Boolean))].sort();
   return {
@@ -116,6 +130,15 @@ export function listFilters(sessions: Session[]) {
     rooms: uniq(sessions.map((s) => s.room)),
     tracks: uniq(sessions.map((s) => s.track)),
   };
+}
+
+// Plain lines, like search results: far fewer tokens than pretty-printed JSON.
+export function formatFilters(f: ReturnType<typeof listFilters>): string {
+  return [
+    `Days: ${f.days.join(", ")}`,
+    `Rooms: ${f.rooms.join("; ")}`,
+    `Tracks: ${f.tracks.join("; ")}`,
+  ].join("\n");
 }
 
 function when(s: Session): string {

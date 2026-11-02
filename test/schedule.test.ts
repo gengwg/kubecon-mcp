@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import fixture from "./fixture.json";
-import { type Feed, formatDetail, formatLine, listFilters, normalize, search } from "../src/schedule";
+import { type Feed, formatDetail, formatFilters, formatLine, listFilters, normalize, parseTime, search } from "../src/schedule";
 
 const sessions = normalize(fixture as Feed);
 const ids = (f: Parameters<typeof search>[1]) => search(sessions, f).map((s) => s.id);
@@ -70,5 +70,24 @@ describe("output", () => {
     const { days } = listFilters(sessions);
     expect(days).toContain("2026-11-10 (tue)");
     expect(days).toEqual([...days].sort());
+  });
+
+  it("lists filters as plain lines", () => {
+    const lines = formatFilters(listFilters(sessions)).split("\n");
+    expect(lines.map((l) => l.split(":")[0])).toEqual(["Days", "Rooms", "Tracks"]);
+    expect(lines[0]).toContain("2026-11-10 (tue)");
+  });
+});
+
+describe("parseTime", () => {
+  it("reads the formats agents send", () => {
+    expect(["14:00", "14", "2pm", "2 PM", "2:00pm"].map(parseTime)).toEqual(Array(5).fill("14:00"));
+    expect(["9:30", "09:30", "9:30am"].map(parseTime)).toEqual(Array(3).fill("09:30"));
+    expect(parseTime("12am")).toBe("00:00");
+    expect(parseTime("12pm")).toBe("12:00");
+  });
+
+  it("rejects what it can't read", () => {
+    for (const bad of ["", "noon", "25:00", "9:75", "13pm", "0am", "9.30"]) expect(parseTime(bad)).toBeUndefined();
   });
 });
